@@ -3,10 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.xty</groupId>
-    <artifactId>shortlink</artifactId>
+    <groupId>com.xty.shortlink</groupId>
+    <artifactId>shortlink-all</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>shortlink</name>
+    <modules>
+        <module>admin</module>
+        <module>project</module>
+        <module>gateway</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <name>shortlink-all</name>
     <description>shortlink</description>
 
 
