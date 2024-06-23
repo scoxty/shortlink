@@ -3,8 +3,6 @@ package com.xty.shortlink.admin.dao.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.xty.shortlink.admin.common.serialize.PhoneDesensitizationSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,7 +22,6 @@ public class UserDO implements Serializable {
 
     private String realName;
 
-    @JsonSerialize(using = PhoneDesensitizationSerializer.class)
     private String phone;
 
     private String mail;
