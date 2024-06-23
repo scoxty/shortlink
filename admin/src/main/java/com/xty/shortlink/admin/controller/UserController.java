@@ -3,8 +3,11 @@ package com.xty.shortlink.admin.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.xty.shortlink.admin.common.convention.result.Result;
 import com.xty.shortlink.admin.common.convention.result.Results;
+import com.xty.shortlink.admin.dto.req.UserLoginReqDTO;
 import com.xty.shortlink.admin.dto.req.UserRegisterReqDTO;
+import com.xty.shortlink.admin.dto.req.UserUpdateReqDTO;
 import com.xty.shortlink.admin.dto.resp.UserActualRespDTO;
+import com.xty.shortlink.admin.dto.resp.UserLoginRespDTO;
 import com.xty.shortlink.admin.dto.resp.UserRespDTO;
 import com.xty.shortlink.admin.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -53,6 +56,40 @@ public class UserController {
     @PostMapping("/api/short-link/v1/user")
     public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam) {
         userService.register(requestParam);
+        return Results.success();
+    }
+
+    /**
+     * 修改用户信息
+     */
+    @PutMapping("/api/short-link/v1/user")
+    public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam) {
+        userService.update(requestParam);
+        return Results.success();
+    }
+
+    /**
+     * 用户登录
+     */
+    @PostMapping("/api/short-link/v1/user/login")
+    public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam) {
+        return Results.success(userService.login(requestParam));
+    }
+
+    /**
+     * 检查用户是否登录
+     */
+    @GetMapping("/api/short-link/v1/user/check-login")
+    public Result<Boolean> checkLogin(@RequestParam("username") String username, @RequestParam("token") String token) {
+        return Results.success(userService.checkLogin(username, token));
+    }
+
+    /**
+     * 用户退出登录
+     */
+    @DeleteMapping("/api/short-link/v1/user/logout")
+    public Result<Void> logout(@RequestParam("username") String username, @RequestParam("token") String token) {
+        userService.logout(username, token);
         return Results.success();
     }
 }
