@@ -11,8 +11,8 @@ import java.util.Date;
 /**
  * 用户持久层实体
  */
-@TableName(value ="t_user")
 @Data
+@TableName(value ="t_user")
 public class UserDO implements Serializable {
     private Long id;
 
