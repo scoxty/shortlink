@@ -20,4 +20,5 @@ public class GroupDO extends BaseDO {
     private String gid;
     private String name;
     private String username;
+    private Integer sortOrder;
 }
