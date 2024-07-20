@@ -1,19 +1,17 @@
 package com.xty.shortlink.admin.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.xty.shortlink.admin.common.database.BaseDO;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 用户持久层实体
  */
 @Data
 @TableName(value ="t_user")
-public class UserDO implements Serializable {
+public class UserDO extends BaseDO implements Serializable{
     private Long id;
 
     private String username;
@@ -27,15 +25,6 @@ public class UserDO implements Serializable {
     private String mail;
 
     private Long deletionTime;
-
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
-
-    @TableField(fill = FieldFill.INSERT)
-    private Integer delFlag;
 
     private static final long serialVersionUID = 1L;
 
@@ -93,9 +82,9 @@ public class UserDO implements Serializable {
         sb.append(", phone=").append(phone);
         sb.append(", mail=").append(mail);
         sb.append(", deletionTime=").append(deletionTime);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", delFlag=").append(delFlag);
+        sb.append(", createTime=").append(getCreateTime());
+        sb.append(", updateTime=").append(getUpdateTime());
+        sb.append(", delFlag=").append(getDelFlag());
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
