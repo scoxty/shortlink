@@ -3,6 +3,7 @@ package com.xty.shortlink.admin.controller;
 import com.xty.shortlink.admin.common.convention.result.Result;
 import com.xty.shortlink.admin.common.convention.result.Results;
 import com.xty.shortlink.admin.dto.req.ShortLinkGroupSaveReqDTO;
+import com.xty.shortlink.admin.dto.req.ShortLinkGroupSortReqDTO;
 import com.xty.shortlink.admin.dto.req.ShortLinkGroupUpdateReqDTO;
 import com.xty.shortlink.admin.dto.resp.ShortLinkGroupRespDTO;
 import com.xty.shortlink.admin.service.GroupService;
@@ -52,6 +53,15 @@ public class GroupController {
     @DeleteMapping("/api/short-link/v1/group")
     public Result<Void> deleteGroup(@RequestParam String gid) {
         groupService.deleteGroup(gid);
+        return Results.success();
+    }
+
+    /**
+     * 短链接分组排序
+     */
+    @PostMapping("/api/short-link/v1/group/sort")
+    public Result<Void> sortGroup(@RequestBody List<ShortLinkGroupSortReqDTO> requestParam) {
+        groupService.sortGroup(requestParam);
         return Results.success();
     }
 }
