@@ -10,4 +10,5 @@ public class ShortLinkGroupRespDTO {
     private String gid;
     private String name;
     private Integer sortOrder;
+    private Integer shortLinkCount;
 }
