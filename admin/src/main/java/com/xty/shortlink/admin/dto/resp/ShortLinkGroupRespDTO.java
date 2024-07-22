@@ -7,9 +7,7 @@ import lombok.Data;
  */
 @Data
 public class ShortLinkGroupRespDTO {
-    private Long id;
     private String gid;
     private String name;
-    private String username;
     private Integer sortOrder;
 }
