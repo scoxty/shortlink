@@ -38,18 +38,24 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
 
     @Override
     public void saveGroup(String groupName) {
+        saveGroup(UserContext.getUsername(), groupName);
+    }
+
+    @Override
+    public void saveGroup(String username, String groupName) {
         String gid;
         do {
             gid = RandomStringUtil.generateRandom();
-        } while (hasGid(gid));
+        } while (hasGid(username, gid));
         GroupDO groupDO = GroupDO.builder()
-                .gid(gid)
-                .name(groupName)
-                .username(UserContext.getUsername())
-                .sortOrder(0)
-                .build();
+            .gid(gid)
+            .sortOrder(0)
+            .username(UserContext.getUsername())
+            .username(username)
+            .name(groupName)
+            .build();
         baseMapper.insert(groupDO);
-    }
+}
 
     @Override
     public List<ShortLinkGroupRespDTO> listGroup() {
@@ -107,12 +113,12 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         });
     }
 
-    private boolean hasGid(String gid) {
+    private boolean hasGid(String username, String gid) {
         LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
                 .eq(GroupDO::getDelFlag, 0)
                 .eq(GroupDO::getGid, gid)
                 // TODO: 设置用户名
-                .eq(GroupDO::getUsername, UserContext.getUsername());
+                .eq(GroupDO::getUsername, Optional.ofNullable(username).orElse(UserContext.getUsername()));
         GroupDO hasGroup = baseMapper.selectOne(queryWrapper);
         return hasGroup != null;
     }
