@@ -1,4 +1,4 @@
-package com.xty.shortlink.admin.remote.dto.req;
+package com.xty.shortlink.project.dto.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -6,14 +6,13 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 短链接创建请求对象
+ * 短链接修改请求对象
  */
 @Data
-public class ShortLinkCreateReqDTO {
-    private String domain;
+public class ShortLinkUpdateReqDTO {
     private String originUrl;
+    private String fullShortUrl;
     private String gid;
-    private Integer createdType;
     private Integer validDateType;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date validDate;
