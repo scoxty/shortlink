@@ -10,6 +10,7 @@ import java.util.Date;
  */
 @Data
 public class ShortLinkCreateReqDTO {
+    private String protocol;
     private String domain;
     private String originUrl;
     private String gid;
