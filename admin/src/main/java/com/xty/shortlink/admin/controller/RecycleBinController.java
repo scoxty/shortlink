@@ -5,6 +5,7 @@ import com.xty.shortlink.admin.common.convention.result.Result;
 import com.xty.shortlink.admin.common.convention.result.Results;
 import com.xty.shortlink.admin.remote.dto.ShortLinkRemoteService;
 import com.xty.shortlink.admin.remote.dto.req.ShortLinkRecycleBinPageReqDTO;
+import com.xty.shortlink.admin.remote.dto.req.ShortLinkRecycleBinRecoverReqDTO;
 import com.xty.shortlink.admin.remote.dto.req.ShortLinkRecycleBinSaveReqDTO;
 import com.xty.shortlink.admin.remote.dto.resp.ShortLinkPageRespDTO;
 import com.xty.shortlink.admin.service.RecycleBinService;
@@ -44,5 +45,14 @@ public class RecycleBinController {
     @GetMapping("/api/short-link/admin/v1/recycle-bin/page")
     public Result<IPage<ShortLinkPageRespDTO>> pageRecycleBinShortLink(ShortLinkRecycleBinPageReqDTO requestParam) {
         return recycleBinService.pageRecycleBinShortLink(requestParam);
+    }
+
+    /**
+     * 恢复回收站短链接
+     */
+    @PostMapping("/api/short-link/admin/v1/recycle-bin/recover")
+    public Result<Void> recoverRecycleBin(@RequestBody ShortLinkRecycleBinRecoverReqDTO requestParam) {
+        shortLinkRemoteService.recoverRecycleBin(requestParam);
+        return Results.success();
     }
 }
