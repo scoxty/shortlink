@@ -6,7 +6,7 @@ import lombok.Data;
  * 回收站保存功能
  */
 @Data
-public class RecycleBinSaveReqDTO {
+public class ShortLinkRecycleBinSaveReqDTO {
     private String gid;
     private String fullShortUrl;
 }
