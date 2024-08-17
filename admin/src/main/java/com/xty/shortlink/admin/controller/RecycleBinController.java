@@ -1,13 +1,13 @@
 package com.xty.shortlink.admin.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xty.shortlink.admin.common.convention.result.Result;
 import com.xty.shortlink.admin.common.convention.result.Results;
-import com.xty.shortlink.admin.remote.dto.ShortLinkRemoteService;
+import com.xty.shortlink.admin.dto.req.RecycleBinRecoverReqDTO;
+import com.xty.shortlink.admin.dto.req.RecycleBinRemoveReqDTO;
+import com.xty.shortlink.admin.dto.req.RecycleBinSaveReqDTO;
+import com.xty.shortlink.admin.remote.ShortLinkActualRemoteService;
 import com.xty.shortlink.admin.remote.dto.req.ShortLinkRecycleBinPageReqDTO;
-import com.xty.shortlink.admin.remote.dto.req.ShortLinkRecycleBinRecoverReqDTO;
-import com.xty.shortlink.admin.remote.dto.req.ShortLinkRecycleBinRemoveReqDTO;
-import com.xty.shortlink.admin.remote.dto.req.ShortLinkRecycleBinSaveReqDTO;
 import com.xty.shortlink.admin.remote.dto.resp.ShortLinkPageRespDTO;
 import com.xty.shortlink.admin.service.RecycleBinService;
 import lombok.RequiredArgsConstructor;
@@ -17,26 +17,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 回收站控制层
+ * 回收站管理控制层
  */
-@RestController
+@RestController(value = "recycleBinControllerByAdmin")
 @RequiredArgsConstructor
 public class RecycleBinController {
 
     private final RecycleBinService recycleBinService;
-
-    /**
-     * 后续重构为 SpringCloud Feign 调用
-     */
-    ShortLinkRemoteService shortLinkRemoteService = new ShortLinkRemoteService() {
-    };
+    private final ShortLinkActualRemoteService shortLinkActualRemoteService;
 
     /**
      * 保存回收站
      */
     @PostMapping("/api/short-link/admin/v1/recycle-bin/save")
-    public Result<Void> saveRecycleBin(@RequestBody ShortLinkRecycleBinSaveReqDTO requestParam) {
-        shortLinkRemoteService.saveRecycleBin(requestParam);
+    public Result<Void> saveRecycleBin(@RequestBody RecycleBinSaveReqDTO requestParam) {
+        shortLinkActualRemoteService.saveRecycleBin(requestParam);
         return Results.success();
     }
 
@@ -44,25 +39,25 @@ public class RecycleBinController {
      * 分页查询回收站短链接
      */
     @GetMapping("/api/short-link/admin/v1/recycle-bin/page")
-    public Result<IPage<ShortLinkPageRespDTO>> pageRecycleBinShortLink(ShortLinkRecycleBinPageReqDTO requestParam) {
+    public Result<Page<ShortLinkPageRespDTO>> pageShortLink(ShortLinkRecycleBinPageReqDTO requestParam) {
         return recycleBinService.pageRecycleBinShortLink(requestParam);
     }
 
     /**
-     * 恢复回收站短链接
+     * 恢复短链接
      */
     @PostMapping("/api/short-link/admin/v1/recycle-bin/recover")
-    public Result<Void> recoverRecycleBin(@RequestBody ShortLinkRecycleBinRecoverReqDTO requestParam) {
-        shortLinkRemoteService.recoverRecycleBin(requestParam);
+    public Result<Void> recoverRecycleBin(@RequestBody RecycleBinRecoverReqDTO requestParam) {
+        shortLinkActualRemoteService.recoverRecycleBin(requestParam);
         return Results.success();
     }
 
     /**
-     * 删除短链接
+     * 移除短链接
      */
     @PostMapping("/api/short-link/admin/v1/recycle-bin/remove")
-    public Result<Void> removeRecycleBin(@RequestBody ShortLinkRecycleBinRemoveReqDTO requestParam) {
-        shortLinkRemoteService.removeRecycleBin(requestParam);
+    public Result<Void> removeRecycleBin(@RequestBody RecycleBinRemoveReqDTO requestParam) {
+        shortLinkActualRemoteService.removeRecycleBin(requestParam);
         return Results.success();
     }
 }

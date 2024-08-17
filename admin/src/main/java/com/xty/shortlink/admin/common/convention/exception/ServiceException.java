@@ -34,3 +34,4 @@ public class ServiceException extends AbstractException {
                 '}';
     }
 }
+

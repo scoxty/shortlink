@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLoginRespDTO {
+
     /**
-     * 用户token
+     * 用户Token
      */
     private String token;
 }

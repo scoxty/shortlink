@@ -4,7 +4,7 @@ import com.xty.shortlink.admin.common.convention.errorcode.BaseErrorCode;
 import com.xty.shortlink.admin.common.convention.errorcode.IErrorCode;
 
 /**
- * 远程服务调用异常
+ * 远程服务调用异常料
  */
 public class RemoteException extends AbstractException {
 
